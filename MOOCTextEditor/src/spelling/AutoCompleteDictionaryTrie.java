@@ -1,25 +1,33 @@
 package spelling;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /** 
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
- * @author You
+ * @author William Cullian
  *
  */
 public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 
     private TrieNode root;
     private int size;
+    private int maxWordSize;
+    private long totalNumCharacters;
     
 
     public AutoCompleteDictionaryTrie()
 	{
 		root = new TrieNode();
+		size = 0;
+		maxWordSize = 0;
+		totalNumCharacters = 0;
 	}
 	
 	
@@ -39,8 +47,29 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public boolean addWord(String word)
 	{
-	    //TODO: Implement this method.
-	    return false;
+		// iterate thru trie adding each char
+		TrieNode curr = root;
+	    for (int i = 0; i < word.length(); i++) {
+	    	char c = word.toLowerCase().charAt(i);
+			curr.insert(c);
+			curr = curr.getChild(c);
+		}
+	    // check if it already existed
+	    if (curr.endsWord()) {
+			return false;
+		}
+	    // we add a new one
+	    else{
+	    	curr.setEndsWord(true);
+	    	size++;
+	    	// keep track of max word length and num chars
+	    	totalNumCharacters += word.length();
+	    	if(word.length() > maxWordSize){
+	    		maxWordSize = word.length();
+	    	}
+	    	
+	    	return true;
+	    }
 	}
 	
 	/** 
@@ -49,8 +78,25 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	 */
 	public int size()
 	{
-	    //TODO: Implement this method
-	    return 0;
+	    return size;
+	}
+	
+	
+	/** 
+	 * Return length of the longest word in the dictionary.
+	 */
+	public int longestWord()
+	{
+	    return maxWordSize;
+	}
+	
+	
+	/** 
+	 * Return the average length of words in the dictionary.
+	 */
+	public double averageWordLength()
+	{
+	    return (double)totalNumCharacters / size;
 	}
 	
 	
@@ -59,7 +105,17 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 	@Override
 	public boolean isWord(String s) 
 	{
-	    // TODO: Implement this method
+	    TrieNode curr = root;
+	    for (int i = 0; i < s.length(); i++) {
+			char c = s.toLowerCase().charAt(i);
+			curr = curr.getChild(c);
+			if(curr == null){
+				return false;
+			}
+		}
+	    if(curr.endsWord()){
+	    	return true;
+	    }
 		return false;
 	}
 
@@ -86,10 +142,24 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
      */@Override
      public List<String> predictCompletions(String prefix, int numCompletions) 
      {
-    	 // TODO: Implement this method
     	 // This method should implement the following algorithm:
     	 // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
     	 //    empty list
+ 		List<String> completions = new ArrayList<String>();
+	   	if (numCompletions <= 0) {
+			return completions;
+	   	}
+		TrieNode stem = root;
+		for (int i = 0; i < prefix.length(); i++) {
+			char c = prefix.toLowerCase().charAt(i);
+			stem = stem.getChild(c);
+			if (stem == null) {
+				return completions;
+			}
+		}
+		if (stem.getValidNextCharacters() == null) {
+			return completions;
+		}
     	 // 2. Once the stem is found, perform a breadth first search to generate completions
     	 //    using the following algorithm:
     	 //    Create a queue (LinkedList) and add the node that completes the stem to the back
@@ -100,8 +170,30 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
     	 //       If it is a word, add it to the completions list
     	 //       Add all of its child nodes to the back of the queue
     	 // Return the list of completions
-    	 
-         return null;
+		
+		// level order search
+ 		Queue <TrieNode> q = new LinkedList<TrieNode>();
+ 		q.add(stem);
+ 		while (!q.isEmpty()) {
+			TrieNode curr = q.remove();
+			if (curr != null) {
+				// add word to completion list
+				if (curr.endsWord()) {
+					completions.add(curr.getText());					
+				}
+				// add chilins to queue
+				Set<Character> chilins = curr.getValidNextCharacters();
+				for (Character character : chilins) {
+					q.add(curr.getChild(character));
+				}
+			}			
+			// check limit
+			if (completions.size() >= numCompletions) {
+				return completions;
+			}
+		}
+ 		System.out.println("Longest word: " + longestWord() + "\tAverage word length: " + averageWordLength());
+        return completions;
      }
 
  	// For debugging

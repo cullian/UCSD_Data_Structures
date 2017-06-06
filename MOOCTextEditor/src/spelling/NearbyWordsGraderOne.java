@@ -64,6 +64,7 @@ public class NearbyWordsGraderOne {
             
         } catch (Exception e) {
             out.println("Runtime error: " + e);
+            out.close();
             return;
         }
 

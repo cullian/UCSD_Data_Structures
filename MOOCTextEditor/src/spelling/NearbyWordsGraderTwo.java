@@ -46,6 +46,7 @@ public class NearbyWordsGraderTwo {
             
         } catch (Exception e) {
             out.println(feedback + "Runtime error: " + e);
+            out.close();
             return;
         }
 

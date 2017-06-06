@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.ltk.ui.refactoring.settings">
+	</section>
+	<section name="FatJarPackageWizard">
+		<item value="C:\Users\William\Documents\UCSD_Data_Structures" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="MainApp - MOOCTextEditor" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\William\Documents\GitHub\cullian.github.io\Projects\Text Editor\MOOCTextEditor.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\William\Documents\GitHub\cullian.github.io\Projects\Text Editor\MOOCTextEditor.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value=".xml"/>
+		</list>
+	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -7,8 +22,12 @@
 		<item value="1" key="rootMode"/>
 		<item value="false" key="linkWithEditor"/>
 	</section>
+	<section name="RenameInformationPopup">
+	</section>
 	<section name="ClasspathContainerSelectionPage">
 		<item value="2" key="index"/>
+	</section>
+	<section name="OptionalMessageDialog.hide.">
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>

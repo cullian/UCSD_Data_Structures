@@ -192,7 +192,7 @@ public class AutoCompleteDictionaryTrie implements  Dictionary, AutoComplete {
 				return completions;
 			}
 		}
-// 		System.out.println("Longest word: " + longestWord() + "\tAverage word length: " + averageWordLength());
+ 		System.out.println("Longest word: " + longestWord() + "\tAverage word length: " + averageWordLength());
         return completions;
      }
 

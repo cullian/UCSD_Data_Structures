@@ -37,60 +37,11 @@ public class WPTree implements WordPath {
 		this.nw = nw;
 	}
 	
-
-	/** Return a path from word1 to word2 through dictionary words with
-	 *  the restriction that each step in the path can involve only a
-	 *  single character mutation  
-	 * @param word1 The first word
-	 * @param word2 The second word
-	 * @return list of Strings which are the path from word1 to word2
-	 *         including word1 and word2
-	 * @author William Cullian
-	 */
+	// see method description in WordPath interface
 	public List<String> findPath(String word1, String word2) 
 	{
-
-		// initial variables
-		List<WPTreeNode> queue = new LinkedList<WPTreeNode>();	// words to explore
-		HashSet<String> visited = new HashSet<String>();   		// to avoid exploring the same  
-														   		// string multiple times
-		
-		// set root to word1
-		root = new WPTreeNode(word1, null);
-		// add word1 to visited
-		visited.add(word1);
-		// add root to queue
-		queue.add(root);
-					
-		// while queue is not empty and we have not found word2
-		while(!queue.isEmpty()){
-			printQueue(queue);
-			// remove first node from queue
-			WPTreeNode curr = queue.remove(0);
-			// get a list of real world neighbors
-			List<String> realWordNeighbors = nw.distanceOne(curr.getWord(), true);
-			// for each neighbor
-			for (String n : realWordNeighbors) {
-				// check if this one has been visited before
-				if (!visited.contains(n)) {
-					// add n as a child of curr
-					WPTreeNode child = curr.addChild(n);
-					// add n to visited
-					visited.add(n);
-					// add node for n to back of queue
-					queue.add(child);
-					// check if n is word2
-					if (n.equals(word2)) {
-						// return path from root to child
-						printQueue(queue);
-						return child.buildPathToRoot();
-					}
-				}
-			}
-		}
-		// else return empty list
-		printQueue(queue);
-		return new LinkedList<String>();
+	    // TODO: Implement this method.
+	    return new LinkedList<String>();
 	}
 	
 	// Method to print a list of WPTreeNodes (useful for debugging)

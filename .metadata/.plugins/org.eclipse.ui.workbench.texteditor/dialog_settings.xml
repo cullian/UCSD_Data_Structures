@@ -6,12 +6,16 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="LLNode&lt;E&gt; n = head" key="selection"/>
+		<item value="longest" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Longest"/>
+			<item value="longest"/>
+			<item value="sysout"/>
+			<item value="Longest Word"/>
 			<item value="LLNode&lt;E&gt; n = head"/>
 		</list>
 		<list key="replacehistory">

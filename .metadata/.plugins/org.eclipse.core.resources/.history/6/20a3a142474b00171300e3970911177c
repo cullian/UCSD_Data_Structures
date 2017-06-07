@@ -45,7 +45,6 @@ public class WPTree implements WordPath {
 	 * @param word2 The second word
 	 * @return list of Strings which are the path from word1 to word2
 	 *         including word1 and word2
-	 * @author William Cullian
 	 */
 	public List<String> findPath(String word1, String word2) 
 	{
@@ -64,7 +63,6 @@ public class WPTree implements WordPath {
 					
 		// while queue is not empty and we have not found word2
 		while(!queue.isEmpty()){
-			printQueue(queue);
 			// remove first node from queue
 			WPTreeNode curr = queue.remove(0);
 			// get a list of real world neighbors
@@ -75,10 +73,10 @@ public class WPTree implements WordPath {
 				if (!visited.contains(n)) {
 					// add n as a child of curr
 					WPTreeNode child = curr.addChild(n);
-					// add n to visited
+					// add it to visited
 					visited.add(n);
-					// add node for n to back of queue
-					queue.add(child);
+					// add it to back of queue
+					queue.add(curr);
 					// check if n is word2
 					if (n.equals(word2)) {
 						// return path from root to child
@@ -89,7 +87,6 @@ public class WPTree implements WordPath {
 			}
 		}
 		// else return empty list
-		printQueue(queue);
 		return new LinkedList<String>();
 	}
 	

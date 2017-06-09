@@ -34,6 +34,7 @@ public class MarkovTextGeneratorGrader {
 
             String input = "I love cats. I hate dogs. I I I I I I I I I I I I I I I I love cats. I I I I I I I I I I I I I I I I hate dogs. I I I I I I I I I like books. I love love. I am a text generator. I love cats. I love cats. I love cats. I love love love socks.";
             gen.retrain(input);
+            System.out.println(gen);
             String res = gen.generateText(LENGTH);
 
             feedback += "\nGenerator produced: " + res + "\n";
@@ -94,5 +95,6 @@ public class MarkovTextGeneratorGrader {
         } catch (Exception e) {
             System.out.println("Error during runtime: " + e);
         }
+        System.out.println("Done!");
     }
 }
